@@ -40,7 +40,7 @@ jobs:
           ./hcsctl/build/hcsctl.test
           ./hcsctl/build/hcsctl uninstall ./hack/inventory/test-sample
           ./hcsctl/build/hcsctl uninstall ./hack/inventory/test-sample # idempotent
-      - working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
+        working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
   e2e_v1_15_3_flannel:
     runs-on: prolinux
     needs: [lint, build]
@@ -55,7 +55,7 @@ jobs:
           ./hcsctl/build/hcsctl.test
           ./hcsctl/build/hcsctl uninstall ./hack/inventory/test-sample
           ./hcsctl/build/hcsctl uninstall ./hack/inventory/test-sample # idempotent
-      - working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
+        working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
   e2e_v1_15_3_calico_with_another_kubeconfigpath:
     runs-on: prolinux
     needs: [lint, build]
@@ -69,11 +69,11 @@ jobs:
           ./hcsctl/build/hcsctl ceph status --kubeconfig=$HOME/config
           ./hcsctl/build/hcsctl uninstall ./hack/inventory/test-sample --kubeconfig $HOME/config
           mv $HOME/config $HOME/.kube/config
-      - working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
+        working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
   e2e_cleanup:
     runs-on: prolinux
     needs: [lint, build, e2e_v1_15_3_calico, e2e_v1_15_3_flannel, e2e_v1_15_3_calico_with_another_kubeconfigpath]
     timeout-minutes: 10
     steps:
       - run: ./hack/prolinux_cluster.sh down
-      - working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
+        working-directory: /home/github-runner/actions-runner/_work/hypercloud-storage/hypercloud-storage
